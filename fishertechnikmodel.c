@@ -57,6 +57,12 @@ void motorTurn(int direction)
     }
 }
 
+void motorTurnSteps(int direction, int steps){
+    motorTurn(direction);
+    motorCountSteps(steps);
+    motorOff();
+}
+
 void motorOff(void)
 {
     PORTD &= ~(1<<OUT_MOTOR_EN); // clear enable bit
@@ -100,6 +106,25 @@ void ledOn(void)
 void ledOff(void)
 {
     PORTB |= (1<<OUT_LED);
+}
+
+void motorCountSteps(int steps)
+{
+    uint8_t motor_steps;
+    
+    motor_steps = 0;
+    do {
+        // Logic 1 (no step), logic 0 (step)
+        while((PIND & (1<<IN_STEPS)) ? 1: 0 ){
+            // wait for falling edge
+        }
+        _delay_ms(10); // De-bounce
+        motor_steps++;
+        while((PIND & (1<<IN_STEPS)) ? 0: 1 ){
+            // wait for rising edge
+        }
+        _delay_ms(10); // De-bounce
+    } while (motor_steps < 3);
 }
 
 /* EOF */

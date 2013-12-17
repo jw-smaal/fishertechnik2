@@ -45,6 +45,7 @@
 void flashntimes(int n);
 void allOff(void);
 void motorTurn(int direction);
+void motorTurnSteps(int direction, int steps);
 void motorOff(void);
 void compressorOn(void);
 void compressorOff(void);
@@ -54,6 +55,7 @@ void hefboomUp(void);
 void hefboomDown(void);
 void ledOn(void);
 void ledOff(void);
+void motorCountSteps(int steps);
 
 /* EOF */
 #endif

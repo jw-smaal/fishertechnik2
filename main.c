@@ -106,11 +106,7 @@ void main(void)
         hefboomUp();
         _delay_ms(300);
         
-        motorTurn(RIGHT);
-        // Should be counting the impulses.
-        _delay_ms(500);  // 0->500ms:sensor  0->800ms:right sorter
-        motorOff();
-        
+        motorTurnSteps(RIGHT, 3);
         // We have arrived at the sensor
         hefboomDown();
         _delay_ms(2000);
@@ -122,11 +118,10 @@ void main(void)
          */
         hefboomUp();
         _delay_ms(400);
-        
-        motorTurn(RIGHT);
-        // TODO: Should be counting the impulses based on COLOUR selection
-        _delay_ms(300);
-        motorOff();
+      
+        // TODO: Should be counting the impulses based on COLOUR selection done
+        // at the ADC
+        motorTurnSteps(RIGHT,2);
         
         // Lay down the block
         hefboomDown();
