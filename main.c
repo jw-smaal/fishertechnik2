@@ -18,45 +18,11 @@
 #define F_CPU 1000000UL
 #include <util/delay.h>
 
-
-/* OUTPUTS */
-#define OUT_COMPRESSOR PC3
-#define OUT_VACUUM PC4
-#define OUT_HEFBOOM PC5
-#define OUT_MOTOR1A PD6
-#define OUT_MOTOR2A PD7
-#define OUT_MOTOR_EN PD5
-#define OUT_LED PB0
-
-/* INPUTS */
-#define IN_COLOUR PC0 
-#define IN_LIGHT PD0
-#define IN_STEPS PD1 
-#define IN_MOTOR_END PD2
-
-/* Program Constants */
-#define LEFT 0 
-#define RIGHT 1
+/* Implementation of fishertechnik model */
+#include "fishertechnikmodel.h"
 
 
 void main(void) __attribute__((noreturn));
-
-/**
- * Prototypes:
- */
-void flashntimes(int n);
-void allOff(void);
-void motorTurn(int direction);
-void motorOff(void);
-void compressorOn(void);
-void compressorOff(void);
-void vacuumOn(void);
-void vacuumOff(void);
-void hefboomUp(void);
-void hefboomDown(void);
-void ledOn(void);
-void ledOff(void);
-
 
 /**
  *******************************************************************
@@ -176,89 +142,4 @@ void main(void)
         allOff();
     }
 }
-
-
-/**
- *******************************************************************
- * VARIOUS FisherTechnik related functions for controlling the model
- * all return void because there is nothing to check 
- * just reading/writing to memory registers.
- *******************************************************************
- */
-void flashntimes(int n){
-    int i = 0;
-    for (i = 0; i < n; i++){
-        ledOn();
-        _delay_ms(600);
-        ledOff();
-        _delay_ms(400);
-    }
-}
-
-void allOff()
-{
-    motorOff();
-    vacuumOff();
-    ledOff();
-    hefboomUp();
-    compressorOff();
-}
-
-void motorTurn(int direction)
-{
-    if(direction == LEFT) {
-        PORTD &= ~(1<<OUT_MOTOR2A); // Clear bit
-        PORTD |= ( (1<<OUT_MOTOR_EN) | (1<<OUT_MOTOR1A) ); // Set bit
-    }
-    else {  // Right
-        PORTD &= ~(1<<OUT_MOTOR1A);
-        PORTD |= ( (1<<OUT_MOTOR_EN) | (1<<OUT_MOTOR2A) );
-    }
-}
-
-void motorOff(void)
-{
-    PORTD &= ~(1<<OUT_MOTOR_EN); // clear enable bit
-}
-
-void compressorOn(void)
-{
-    PORTC |= (1<<OUT_COMPRESSOR);
-}
-
-void compressorOff(void)
-{
-    PORTC &= ~(1<<OUT_COMPRESSOR);
-}
-
-void vacuumOn(void)
-{
-    PORTC |= (1<<OUT_VACUUM);
-}
-
-void vacuumOff(void)
-{
-    PORTC &= ~(1<<OUT_VACUUM);
-}
-
-void hefboomUp(void)
-{
-    PORTC &= ~(1<<OUT_HEFBOOM);
-}
-
-void hefboomDown(void)
-{
-    PORTC |= (1<<OUT_HEFBOOM);
-}
-
-void ledOn(void)
-{
-    PORTB &= ~(1<<OUT_LED);
-}
-
-void ledOff(void)
-{
-    PORTB |= (1<<OUT_LED);
-}
-
 /* EOF */
