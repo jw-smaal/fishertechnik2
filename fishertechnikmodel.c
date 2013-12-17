@@ -45,6 +45,13 @@ void allOff()
     compressorOff();
 }
 
+
+void motorTurnSteps(int direction, int steps){
+    motorTurn(direction);
+    motorCountSteps(steps);
+    motorOff();
+}
+
 void motorTurn(int direction)
 {
     if(direction == LEFT) {
@@ -55,12 +62,6 @@ void motorTurn(int direction)
         PORTD &= ~(1<<OUT_MOTOR1A);
         PORTD |= ( (1<<OUT_MOTOR_EN) | (1<<OUT_MOTOR2A) );
     }
-}
-
-void motorTurnSteps(int direction, int steps){
-    motorTurn(direction);
-    motorCountSteps(steps);
-    motorOff();
 }
 
 void motorOff(void)
@@ -118,13 +119,13 @@ void motorCountSteps(int steps)
         while((PIND & (1<<IN_STEPS)) ? 1: 0 ){
             // wait for falling edge
         }
-        _delay_ms(10); // De-bounce
+        _delay_ms(1); // De-bounce
         motor_steps++;
         while((PIND & (1<<IN_STEPS)) ? 0: 1 ){
             // wait for rising edge
         }
-        _delay_ms(10); // De-bounce
-    } while (motor_steps < 3);
+        //_delay_ms(1); // De-bounce
+    } while (motor_steps < steps);
 }
 
 /* EOF */

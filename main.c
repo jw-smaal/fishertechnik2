@@ -106,7 +106,7 @@ void main(void)
         hefboomUp();
         _delay_ms(300);
         
-        motorTurnSteps(RIGHT, 3);
+        motorTurnSteps(RIGHT, 4);
         // We have arrived at the sensor
         hefboomDown();
         _delay_ms(2000);
@@ -116,16 +116,32 @@ void main(void)
          * based on the colour.
          * finally hefboomDown()....
          */
+        
+        
         hefboomUp();
         _delay_ms(400);
       
         // TODO: Should be counting the impulses based on COLOUR selection done
         // at the ADC
-        motorTurnSteps(RIGHT,2);
+        motorTurnSteps(RIGHT,5);
         
         // Lay down the block
         hefboomDown();
         _delay_ms(400);
+        
+#if 1
+        hefboomUp();
+        _delay_ms(400);
+        motorTurnSteps(RIGHT,2);
+        hefboomDown();
+        _delay_ms(400);
+
+        hefboomUp();
+        _delay_ms(400);
+        motorTurnSteps(RIGHT,2);
+        hefboomDown();
+        _delay_ms(400);
+#endif
         
         vacuumOff();
         _delay_ms(80);
