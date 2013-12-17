@@ -6,10 +6,17 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXFileReference section */
+		23D63097185E03DB00EA1A0E /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		23D63098185E03E200EA1A0E /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
 /* Begin PBXGroup section */
 		23FDF244185E021E00CB6A2A = {
 			isa = PBXGroup;
 			children = (
+				23D63098185E03E200EA1A0E /* Makefile */,
+				23D63097185E03DB00EA1A0E /* main.c */,
 			);
 			sourceTree = "<group>";
 		};
@@ -23,6 +30,7 @@
 			buildPhases = (
 			);
 			buildToolPath = /usr/bin/make;
+			buildWorkingDirectory = "";
 			dependencies = (
 			);
 			name = fishertechnik2;
@@ -163,6 +171,7 @@
 				23FDF24E185E021E00CB6A2A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
