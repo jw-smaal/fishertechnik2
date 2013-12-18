@@ -135,5 +135,41 @@ void motorCountSteps(int steps)
     } while (motor_steps < steps);
 }
 
+
+uint8_t readColorSensor(void)
+{
+    uint16_t adc_value;
+    uint8_t detected_color = INVALID;
+    /**
+     * Colour sensor ADC conversion.
+     */
+    ADCSRA |= (1<<ADSC); // start conversion
+    while((ADCSRA & (1<<ADSC))==1<<ADSC) {
+        // wait for conversion to complete.
+    }
+    adc_value = ADCL; // first read ADCL then ADCH; read datasheet!
+    adc_value |= ADCH<<8 ; // 2.91V = open;
+    // 2.93V = blue;
+    // 2.56V = red;
+    // 2.48V = white;
+    if(adc_value <= (1024/5)*2.53){
+        // WHITE
+        detected_color = WHITE;
+        flashntimes(2);
+    }
+    else if(adc_value >= (1024/5)*2.56  && adc_value < (1024/5)*2.80) {
+        // RED
+        detected_color = RED;
+        flashntimes(1);
+    }
+    else if(adc_value > (1024/5)*2.90) {
+        // BLUE
+        detected_color = BLUE;
+        flashntimes(3);
+    }
+    /* done with detection */
+    return detected_color;
+}
+
 /* EOF */
 

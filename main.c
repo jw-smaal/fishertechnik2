@@ -78,7 +78,7 @@ void main(void)
 {
     uint8_t light_sensor;
     uint8_t motor_end;
-    uint16_t adc_value;
+   // uint16_t adc_value;
     uint8_t detected_color = 0;
     
     init_mcu();
@@ -119,24 +119,22 @@ void main(void)
         
         // motorTurnSteps(RIGHT, 5);
         motorTurn(RIGHT);
-        _delay_ms(460);
+        _delay_ms(460); // Had issues with counting the impulses; this is more stable.
         motorOff();
         
-        // We have arrived at the sensor
+        // We have arrived at the color sensor
         hefboomDown();
         _delay_ms(2000);
-        /* 
-         * TODO: insert colour sensor ADC conversion.
-         * then hefboomUp(); then turn the motor to the right (n) steps
-         * based on the colour.
-         * finally hefboomDown()....
+        
+#if 0
+        /**
+         * Colour sensor ADC conversion.
          */
         ADCSRA |= (1<<ADSC); // start conversion
         while((ADCSRA & (1<<ADSC))==1<<ADSC) {
-            // wait for conversion to complete at least 24 cylces
-            //
+            // wait for conversion to complete.
         }
-        adc_value = ADCL; // first read ADCL then ADCH !
+        adc_value = ADCL; // first read ADCL then ADCH; read datasheet!
         adc_value |= ADCH<<8 ; // 2.91V = open;
                                       // 2.93V = blue;
                                       // 2.56V = red;
@@ -156,7 +154,10 @@ void main(void)
             detected_color = BLUE;
             flashntimes(3);
         }
-       
+        /* done with detection */
+#endif
+        detected_color = readColorSensor();
+        
         hefboomUp();
         _delay_ms(400);
       

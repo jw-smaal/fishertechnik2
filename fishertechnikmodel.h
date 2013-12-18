@@ -39,9 +39,11 @@
 #define LEFT 0 
 #define RIGHT 1
 
-#define BLUE 0 
-#define WHITE 1
-#define RED 2 
+// Colours
+#define INVALID 0
+#define BLUE 1
+#define WHITE 2
+#define RED 3
 
 /**
  * Prototypes:
@@ -60,6 +62,7 @@ void hefboomDown(void);
 void ledOn(void);
 void ledOff(void);
 void motorCountSteps(int steps);
+uint8_t readColorSensor(void);
 
 /* EOF */
 #endif
