@@ -37,7 +37,7 @@ main.o: main.c
 fishertechnikmodel.o: fishertechnikmodel.c
 
 clean:
-	rm -rf *.o $(PRG).elf *.eps *.png *.pdf *.bak 
+	rm -rf *.o $(PRG).elf *.eps *.png *.pdf *.bak $(PRG).bin $(PRG).hex $(PRG).srec
 	rm -rf *.lst *.map $(EXTRA_CLEAN_FILES)
 
 install: 

@@ -49,6 +49,15 @@ void init_mcu(void)
      */
     TCCR1B |= ( (1<<CS10) | (1<<CS11) ); // Use prescale divided by 64.
     
+    /*
+     * INIT ADC
+     */
+    ADCSRA |= (1<<ADEN);
+    // ADMUX &= ˜(1 <<ADLAR);
+    ADMUX = 0x00;
+    
+    
+    
     // This ledsequence is to indicate power-on-reset.
     allOff();
     for(i = 0; i < 5; i++){
@@ -69,6 +78,8 @@ void main(void)
 {
     uint8_t light_sensor;
     uint8_t motor_end;
+    uint16_t adc_value;
+    uint8_t detected_color = 0;
     
     init_mcu();
     
@@ -106,7 +117,11 @@ void main(void)
         hefboomUp();
         _delay_ms(300);
         
-        motorTurnSteps(RIGHT, 4);
+        // motorTurnSteps(RIGHT, 5);
+        motorTurn(RIGHT);
+        _delay_ms(460);
+        motorOff();
+        
         // We have arrived at the sensor
         hefboomDown();
         _delay_ms(2000);
@@ -116,32 +131,55 @@ void main(void)
          * based on the colour.
          * finally hefboomDown()....
          */
-        
-        
+        ADCSRA |= (1<<ADSC); // start conversion
+        while((ADCSRA & (1<<ADSC))==1<<ADSC) {
+            // wait for conversion to complete at least 24 cylces
+            //
+        }
+        adc_value = ADCL; // first read ADCL then ADCH !
+        adc_value |= ADCH<<8 ; // 2.91V = open;
+                                      // 2.93V = blue;
+                                      // 2.56V = red;
+                                      // 2.48V = white;
+        if(adc_value <= (1024/5)*2.53){
+            // WHITE
+            detected_color = WHITE;
+            flashntimes(2);
+        }
+        else if(adc_value >= (1024/5)*2.56  && adc_value < (1024/5)*2.80) {
+            // RED
+            detected_color = RED;
+            flashntimes(1);
+        }
+        else if(adc_value > (1024/5)*2.90) {
+            // BLUE
+            detected_color = BLUE;
+            flashntimes(3);
+        }
+       
         hefboomUp();
         _delay_ms(400);
       
-        // TODO: Should be counting the impulses based on COLOUR selection done
-        // at the ADC
-        motorTurnSteps(RIGHT,5);
-        
-        // Lay down the block
-        hefboomDown();
-        _delay_ms(400);
-        
-#if 1
-        hefboomUp();
-        _delay_ms(400);
-        motorTurnSteps(RIGHT,2);
-        hefboomDown();
-        _delay_ms(400);
-
-        hefboomUp();
-        _delay_ms(400);
-        motorTurnSteps(RIGHT,2);
-        hefboomDown();
-        _delay_ms(400);
-#endif
+        switch(detected_color){
+            case RED:
+                motorTurnSteps(RIGHT,8);
+                hefboomDown();
+                _delay_ms(400);
+                break;
+            case WHITE:
+                _delay_ms(400);
+                motorTurnSteps(RIGHT,6);
+                hefboomDown();
+                _delay_ms(400);
+                break;
+            case BLUE:
+                motorTurnSteps(RIGHT,4);
+                hefboomDown();
+                _delay_ms(400);
+                break;
+            default:
+                break;
+        }
         
         vacuumOff();
         _delay_ms(80);

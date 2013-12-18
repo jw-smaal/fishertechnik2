@@ -39,6 +39,10 @@
 #define LEFT 0 
 #define RIGHT 1
 
+#define BLUE 0 
+#define WHITE 1
+#define RED 2 
+
 /**
  * Prototypes:
  */

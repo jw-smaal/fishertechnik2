@@ -119,10 +119,17 @@ void motorCountSteps(int steps)
         while((PIND & (1<<IN_STEPS)) ? 1: 0 ){
             // wait for falling edge
         }
-        _delay_ms(1); // De-bounce
         motor_steps++;
+        if(motor_steps == steps) {
+            return; // Don't wait for rising edge
+        }
+        _delay_ms(10); // De-bounce
         while((PIND & (1<<IN_STEPS)) ? 0: 1 ){
             // wait for rising edge
+        }
+        motor_steps++;
+        if(motor_steps == steps){
+            return; 
         }
         //_delay_ms(1); // De-bounce
     } while (motor_steps < steps);
