@@ -22,7 +22,7 @@
 /**
  *******************************************************************
  * VARIOUS FisherTechnik related functions for controlling the model
- * all return void because there is nothing to check 
+ * most return void because there is nothing to check 
  * just reading/writing to memory registers.
  *******************************************************************
  */
@@ -135,14 +135,14 @@ void motorCountSteps(int steps)
     } while (motor_steps < steps);
 }
 
-
+/**
+ * Colour sensor ADC conversion.
+ */
 uint8_t readColorSensor(void)
 {
     uint16_t adc_value;
     uint8_t detected_color = INVALID;
-    /**
-     * Colour sensor ADC conversion.
-     */
+   
     ADCSRA |= (1<<ADSC); // start conversion
     while((ADCSRA & (1<<ADSC))==1<<ADSC) {
         // wait for conversion to complete.

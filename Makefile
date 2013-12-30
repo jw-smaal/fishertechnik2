@@ -40,7 +40,7 @@ clean:
 	rm -rf *.o $(PRG).elf *.eps *.png *.pdf *.bak $(PRG).bin $(PRG).hex $(PRG).srec
 	rm -rf *.lst *.map $(EXTRA_CLEAN_FILES)
 
-install: 
+install: all
 	$(AVRTOOLS_PATH)/avrdude -patmega328p -c buspirate -P /dev/tty.usbserial-A901LOEI -b 115200 -U flash:w:$(PRG).hex:i
 
 lst:  $(PRG).lst
