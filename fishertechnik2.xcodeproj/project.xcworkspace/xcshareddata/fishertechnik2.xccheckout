@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>05E01EF5-8626-40F0-B0FB-8070F2BF0B4D</string>
+	<key>IDESourceControlProjectName</key>
+	<string>fishertechnik2</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>DA54073D5A80ABC9EEB7CCFF06A3F29090F2ACDF</key>
+		<string>https://github.com/jw-smaal/fishertechnik2.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>fishertechnik2.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>DA54073D5A80ABC9EEB7CCFF06A3F29090F2ACDF</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/jw-smaal/fishertechnik2.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>DA54073D5A80ABC9EEB7CCFF06A3F29090F2ACDF</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>DA54073D5A80ABC9EEB7CCFF06A3F29090F2ACDF</string>
+			<key>IDESourceControlWCCName</key>
+			<string>fishertechnik2</string>
+		</dict>
+	</array>
+</dict>
+</plist>
