@@ -9,7 +9,7 @@
  * I/O driving solenoid pneumatic valves, motor.  Sensors: switches
  * and phototransistors.
  *
- * Jan-Willem Smaal <jws@gispen.org> 22 Nov 2013
+ * Jan-Willem Smaal <jws@gispen.org> 22 Nov 2014
  *******************************************************************
  */
 #include <inttypes.h>
