@@ -35,6 +35,8 @@
 #define IN_STEPS PD1 
 #define IN_MOTOR_END PD2
 
+
+
 /* Program Constants */
 #define LEFT 0 
 #define RIGHT 1
