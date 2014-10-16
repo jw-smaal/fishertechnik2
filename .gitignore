@@ -12,3 +12,13 @@ xcuserdata
 *.moved-aside
 DerivedData
 *.xcuserstate
+*.o main.elf 
+*.eps 
+*.png 
+*.pdf 
+*.bak 
+main.bin 
+main.hex 
+main.srec
+*.lst 
+*.map
